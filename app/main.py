@@ -39,6 +39,7 @@ def ranks():
         values=rank_counts(),
         textinfo='label+percent',
         showlegend=False,
+        hole=0.5,
     )]
     layout = go.Layout(
         template='plotly_dark',
