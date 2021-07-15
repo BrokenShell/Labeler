@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="heading">Human Rights First: Blue Witness</h1>
+<h2 class="sub-heading">Edit Rank by Index Number</h2>
+<form id="form" method="post" action="{{ url_for('edit') }}">
+    <p><span>Index:</span><input type="text" autofocus="autofocus" name="idx" id="idx" /></p>
+    <p><span>Rank:</span><input name="rank" id="rank" />
+    <button type="submit" id="submit" name="submit">Submit</button></p>
+    <span class="clear"></span>
+</form>
+{% endblock %}

@@ -68,7 +68,7 @@ def delete_by_id(idx: int):
     db_action(f"DELETE FROM {table_name} WHERE id = {idx};")
 
 
-def update_rank_by_id(idx, rank):
+def update_rank_by_id(idx: int, rank: int):
     db_action(f"""UPDATE {table_name} 
     SET labels = {rank} 
     WHERE id = {idx};""")
@@ -79,7 +79,3 @@ def rank_counts():
     FROM {table_name}
     GROUP BY labels
     ORDER BY labels;""")]
-
-
-if __name__ == '__main__':
-    print(rank_counts())

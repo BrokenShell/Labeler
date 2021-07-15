@@ -5,7 +5,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-from app.db_ops import insert_data, load_data, rank_counts
+from app.db_ops import insert_data, load_data, rank_counts, update_rank_by_id
 
 APP = Flask(__name__)
 tweets = pd.read_csv('app/data/data.csv')['tweets']
@@ -31,8 +31,30 @@ def home():
     )
 
 
-@APP.route("/ranks/")
-def ranks():
+@APP.route("/entry", methods=['GET', 'POST'])
+def entry():
+    rank = request.form.get("rank")
+    tweet = request.form.get("tweet")
+    if rank in {'0', '1', '2', '3', '4', '5'} and tweet:
+        insert_data(tweet, int(rank))
+    return render_template(
+        "entry.html",
+    )
+
+
+@APP.route("/edit", methods=['GET', 'POST'])
+def edit():
+    rank = request.form.get("rank")
+    idx = request.form.get("idx")
+    if rank in {'0', '1', '2', '3', '4', '5'} and idx:
+        update_rank_by_id(idx=int(idx), rank=int(rank))
+    return render_template(
+        "edit.html",
+    )
+
+
+@APP.route("/view/")
+def view():
     labels = ['Rank 0', 'Rank 1', 'Rank 2', 'Rank 3', 'Rank 4', 'Rank 5']
     data = [go.Pie(
         labels=labels,
@@ -51,9 +73,9 @@ def ranks():
     )
     fig = go.Figure(data=data, layout=layout)
     return render_template(
-        "ranks.html",
+        "view.html",
         graph_json=fig.to_json(),
-        tweets=load_data(20),
+        tweets=load_data(10),
     )
 
 
