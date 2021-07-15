@@ -37,9 +37,7 @@ def entry():
     tweet = request.form.get("tweet")
     if rank in {'0', '1', '2', '3', '4', '5'} and tweet:
         insert_data(tweet, int(rank))
-    return render_template(
-        "entry.html",
-    )
+    return render_template("entry.html")
 
 
 @APP.route("/edit", methods=['GET', 'POST'])
@@ -48,12 +46,10 @@ def edit():
     idx = request.form.get("idx")
     if rank in {'0', '1', '2', '3', '4', '5'} and idx:
         update_rank_by_id(idx=int(idx), rank=int(rank))
-    return render_template(
-        "edit.html",
-    )
+    return render_template("edit.html")
 
 
-@APP.route("/view/")
+@APP.route("/view")
 def view():
     labels = ['Rank 0', 'Rank 1', 'Rank 2', 'Rank 3', 'Rank 4', 'Rank 5']
     data = [go.Pie(
@@ -79,7 +75,7 @@ def view():
     )
 
 
-@APP.route("/about/")
+@APP.route("/about")
 def about():
     return render_template("about.html")
 
