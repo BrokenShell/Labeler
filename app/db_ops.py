@@ -75,7 +75,7 @@ def update_rank_by_id(idx: int, rank: int):
 
 
 def rank_counts():
-    return [itm for itm in db_query(f"""SELECT labels, COUNT( labels ) 
+    return [itm[1] for itm in db_query(f"""SELECT labels, COUNT( labels ) 
     FROM {table_name}
     GROUP BY labels
     ORDER BY labels;""")]

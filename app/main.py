@@ -52,13 +52,13 @@ def edit():
 @APP.route("/view")
 def view():
     labels = ['Rank 0', 'Rank 1', 'Rank 2', 'Rank 3', 'Rank 4', 'Rank 5']
-    data = [go.Pie(
+    data = go.Pie(
         labels=labels,
         values=rank_counts(),
         textinfo='label+percent',
         showlegend=False,
         hole=0.5,
-    )]
+    )
     layout = go.Layout(
         template='plotly_dark',
         paper_bgcolor='rgba(0,0,0,0)',
