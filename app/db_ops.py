@@ -40,7 +40,7 @@ def initialize_db():
 
 def insert_data(tweet: str, label: int):
     """ Inserts a new row """
-    hash_set = {hash(row[1]) for row in load_data(1000)}
+    hash_set = {hash(row[1]) for row in load_data(100)}
     if hash(tweet) not in hash_set:
         db_action(f"""INSERT INTO {table_name} 
         (tweets, labels) 
@@ -75,7 +75,11 @@ def update_rank_by_id(idx: int, rank: int):
 
 
 def rank_counts():
-    return [itm[0] for itm in db_query(f"""SELECT COUNT( labels ) 
+    return [itm for itm in db_query(f"""SELECT labels, COUNT( labels ) 
     FROM {table_name}
     GROUP BY labels
     ORDER BY labels;""")]
+
+
+if __name__ == '__main__':
+    print(rank_counts())
