@@ -1,3 +1,6 @@
+:root {
+  color-scheme: dark;
+}
 #form {
     width: 860px;
     padding: 10px 10px 10px 45px;
@@ -18,11 +21,18 @@
     width: 320px;
     margin-left: -9px
 }
+#form textarea {
+    width: 400px;
+    height: 100px;
+}
 #form input#idx {
     margin-left: -9px
 }
 #form button#submit {
     margin-left: 20px;
+}
+#form button#submit:hover {
+    cursor: pointer;
 }
 table {
     width: 800px;
